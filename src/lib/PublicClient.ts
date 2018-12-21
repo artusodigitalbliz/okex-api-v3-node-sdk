@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 
 export function PublicClient(
   apiUri = 'https://www.okex.com/',
-  axiosConfig = { }
+  axiosConfig = {}
 ): {
   readonly getSpotInstruments: () => Promise<any>;
 } {

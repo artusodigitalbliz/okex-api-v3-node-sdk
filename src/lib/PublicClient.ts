@@ -2,10 +2,9 @@ import axios, { AxiosInstance } from 'axios';
 
 export function PublicClient(
   apiUri = 'https://www.okex.com/',
-  axiosConfig = {}
+  axiosConfig = { }
 ): {
   readonly getSpotInstruments: () => Promise<any>;
-  // readonly getSwapInstruments: () => Promise<any>;
 } {
   const axiosInstance: AxiosInstance = axios.create({
     baseURL: apiUri,
@@ -20,8 +19,5 @@ export function PublicClient(
     async getSpotInstruments(): Promise<any> {
       return get('/api/spot/v3/instruments');
     }
-    // async getSwapInstruments(): Promise<any> {
-    //   return axios.get('/api/swap/v3/instruments');
-    // }
   };
 }

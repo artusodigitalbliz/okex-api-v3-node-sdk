@@ -1,11 +1,11 @@
 {
   "name": "okex-node",
-  "version": "1.0.0",
+  "version": "0.0.11",
   "description": "The Node.js library for OKEx V3 API.",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
-  "repository": "https://github.com/YOUR_GITHUB_USER_NAME/okex-node",
+  "repository": "https://github.com/kamma-cc/okex-node",
   "license": "MIT",
   "keywords": [],
   "scripts": {
@@ -51,7 +51,12 @@
     "node": ">=8.9"
   },
   "dependencies": {
-    "sha.js": "^2.4.11"
+    "@types/node": "^10.12.2",
+    "@types/pako": "^1.0.0",
+    "@types/ws": "^6.0.1",
+    "axios": "^0.18.0",
+    "pako": "^1.0.6",
+    "ws": "^6.1.0"
   },
   "devDependencies": {
     "ava": "1.0.0-beta.7",

@@ -2,7 +2,7 @@
 import test from 'ava';
 import { PublicClient } from './PublicClient';
 
-test('first', async t => {
+test('getSpotInstruments', async t => {
   const publicClient = PublicClient();
   const data = await publicClient.getSpotInstruments();
   t.true(data.length > 0);

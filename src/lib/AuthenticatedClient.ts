@@ -25,7 +25,7 @@ export function AuthenticatedClient(
     // tslint:disable:no-if-statement
     // tslint:disable:no-let
     // tslint:disable:no-expression-statement
-    const timestamp = new Date().toISOString();
+    const timestamp = Date.now() / 1000;
     let body = '';
     if (options.body) {
       body = JSON.stringify(options.body);

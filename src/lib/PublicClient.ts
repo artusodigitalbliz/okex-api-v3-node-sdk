@@ -27,17 +27,27 @@ export function PublicClient(
       return get(`/api/spot/v3/instruments/${instrument_id}/book`, params);
     },
     async getSpotTicker(instrument_id?: string): Promise<any> {
-      return instrument_id ? get(`/api/spot/v3/instruments/${instrument_id}/ticker`) : get('/api/spot/v3/instruments/ticker');
+      return instrument_id
+        ? get(`/api/spot/v3/instruments/${instrument_id}/ticker`)
+        : get('/api/spot/v3/instruments/ticker');
     },
     async getSpotTrade(
       instrument_id: string,
-      params?: { readonly from?: string, readonly to?: string, readonly limit?: string }
+      params?: {
+        readonly from?: string;
+        readonly to?: string;
+        readonly limit?: string;
+      }
     ): Promise<any> {
       return get(`/api/spot/v3/instruments/${instrument_id}/trades`, params);
     },
     async getSpotCandles(
       instrument_id: string,
-      params?: { readonly start?: string, readonly end?: string, readonly granularity?: number }
+      params?: {
+        readonly start?: string;
+        readonly end?: string;
+        readonly granularity?: number;
+      }
     ): Promise<any> {
       return get(`/api/spot/v3/instruments/${instrument_id}/candles`, params);
     }

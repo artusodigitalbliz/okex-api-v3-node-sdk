@@ -4,7 +4,7 @@ import axios, { AxiosInstance } from 'axios';
 import * as crypto from 'crypto';
 import * as querystring from 'querystring';
 
-export function PublicClient(
+export function AuthenticatedClient(
   key: string,
   secret: string,
   passphrase: string,

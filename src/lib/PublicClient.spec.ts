@@ -4,6 +4,6 @@ import { PublicClient } from './PublicClient';
 
 test('first', async t => {
   const publicClient = PublicClient();
-  publicClient.getSpotInstruments();
-  t.is(0, 0);
+  const data = await publicClient.getSpotInstruments();
+  t.log(data);
 });

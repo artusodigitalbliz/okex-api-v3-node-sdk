@@ -1,13 +1,14 @@
 import axios, { AxiosInstance } from 'axios';
 
 export function PublicClient(
-  apiUri = 'https://www.okex.com/',
+  apiUri = 'https://www.okex.com',
   axiosConfig = {}
 ): {
   readonly getSpotInstruments: () => Promise<any>;
 } {
   const axiosInstance: AxiosInstance = axios.create({
     baseURL: apiUri,
+    timeout: 3000,
     ...axiosConfig
   });
 

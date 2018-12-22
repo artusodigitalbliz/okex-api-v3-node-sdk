@@ -37,8 +37,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
-      - run: npx nyc report --reporter=lcov | npx codecov
-      - run: npm run cov:check
 
 workflows:
   version: 2

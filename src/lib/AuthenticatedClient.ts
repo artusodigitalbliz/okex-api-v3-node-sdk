@@ -2,7 +2,6 @@
 
 import axios, { AxiosInstance } from 'axios';
 import * as crypto from 'crypto';
-import * as querystring from 'querystring';
 
 export function AuthenticatedClient(
   key: string,
@@ -20,19 +19,13 @@ export function AuthenticatedClient(
   const signRequest = (
     method: string,
     path: string,
-    options: { readonly qs?: string; readonly body?: object } = {}
+    options: { readonly qs?: string; readonly body?: string } = {}
   ) => {
     // tslint:disable:no-if-statement
     // tslint:disable:no-let
     // tslint:disable:no-expression-statement
     const timestamp = Date.now() / 1000;
-    let body = '';
-    if (options.body) {
-      body = JSON.stringify(options.body);
-    } else if (options.qs && Object.keys(options.qs).length !== 0) {
-      body = '?' + querystring.stringify(options.qs);
-    }
-    const what = timestamp + method.toUpperCase() + path + body;
+    const what = timestamp + method.toUpperCase() + path + options.body || '';
     const hmac = crypto.createHmac('sha256', secret);
     const signature = hmac.update(what).digest('base64');
     return {
@@ -45,7 +38,7 @@ export function AuthenticatedClient(
   const getSignature = (
     method: string,
     relativeURI: string,
-    opts: { readonly body?: object } = {}
+    opts: { readonly body?: string } = {}
   ) => {
     const sig = signRequest(method, relativeURI, opts);
 
@@ -63,9 +56,32 @@ export function AuthenticatedClient(
       .then(res => res.data);
   }
 
+  async function post(
+    url: string,
+    body?: object,
+    params?: object
+  ): Promise<any> {
+    const bodyJson = JSON.stringify(body);
+    return axiosInstance
+      .post(url, bodyJson, {
+        headers: { ...getSignature('get', url, { body: bodyJson }) },
+        params
+      })
+      .then(res => res.data);
+  }
+
   return {
     async getSpotAccounts(): Promise<any> {
       return get('/api/spot/v3/accounts');
+    },
+    async postSpotOrder(params: {
+      readonly instrument_id: string;
+      readonly client_oid?: string;
+      readonly type: string;
+      readonly side: string;
+      readonly margin_trading?: number;
+    }): Promise<any> {
+      return post('/api/spot/v3/orders', params);
     }
   };
 }

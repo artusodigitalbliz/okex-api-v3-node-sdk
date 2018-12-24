@@ -1,8 +1,8 @@
 // tslint:disable
 import { EventEmitter } from 'events';
-import * as WebSocket from 'ws';
-import * as pako from 'pako';
-import * as crypto from 'crypto';
+import WebSocket from 'ws';
+import pako from 'pako';
+import crypto from 'crypto';
 
 export class V3WebsocketClient extends EventEmitter {
   private websocketUri: string;

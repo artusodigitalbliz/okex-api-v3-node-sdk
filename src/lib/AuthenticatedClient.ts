@@ -100,7 +100,7 @@ export function AuthenticatedClient(
               readonly side: string;
               readonly margin_trading?: number;
             }
-          ]
+            ]
         ): Promise<any> {
           return post('/api/spot/v3/batch_orders', params);
         },
@@ -116,7 +116,7 @@ export function AuthenticatedClient(
         async postCancelBatchOrders(
           params: [
             { readonly instument_id: string; readonly order_ids: [string] }
-          ]
+            ]
         ): Promise<any> {
           return post(`/api/spot/v3/cancel_batch_orders`, params);
         },
@@ -189,7 +189,7 @@ export function AuthenticatedClient(
           return get(
             `/api/account/v3/withdrawal/history${
               currency ? `/${currency}` : ''
-            }`
+              }`
           );
         },
         async getLedger(params?: {
@@ -202,7 +202,7 @@ export function AuthenticatedClient(
           return get(
             `/api/account/v3/ledger${
               params ? `?${querystring.stringify(params)}` : ''
-            }`
+              }`
           );
         },
         async getAddress(params: { readonly currency: string }): Promise<any> {
@@ -215,6 +215,79 @@ export function AuthenticatedClient(
             `/api/account/v3/deposit/history${currency ? `/${currency}` : ''}`
           );
         }
+      };
+    },
+    futures(): any {
+      return {
+        async getPosition(instrument_id?: string): Promise<any> {
+          return get(`/api/futures/v3${instrument_id ? `/${instrument_id}` : ''}/position`);
+        },
+        async getAccounts(currency?: string): Promise<any> {
+          return get(`/api/futures/v3/accounts${currency ? `/${currency}` : ''}`);
+        },
+        async getLeverage(currency: string): Promise<any> {
+          return get(`/api/futures/v3/accounts/${currency}/leverage`);
+        },
+        async postLeverage(currency: string, params: object): Promise<any> {
+          return post(`/api/futures/v3/accounts/${currency}/leverage`, params);
+        },
+        async getAccountsLedger(currency: string, params?: {
+          readonly from?: number,
+          readonly to?: number,
+          readonly limit?: number,
+        }): Promise<any> {
+          return get(`/api/futures/v3/accounts/${currency}/ledger${params ? `?${querystring.stringify(params)}` : ''}`);
+        },
+        async postOrder(params: {
+          readonly client_oid?: string,
+          readonly instrument_id: string,
+          readonly type: string,
+          readonly price: number,
+          readonly size: number,
+          readonly match_price?: string,
+          readonly leverage: number,
+        }): Promise<any> {
+          return post('/api/futures/v3/order', params);
+        },
+        async postOrders(params: {
+          readonly instrument_id: string,
+          readonly orders_data: string,
+          readonly leverage: number,
+          readonly client_oid?: string,
+        }): Promise<any> {
+          return post('/api/futures/v3/orders', params);
+        },
+        async cancelOrder(instrument_id: string, order_id: string): Promise<any> {
+          return post(`/api/futures/v3/cancel_order/${instrument_id}/${order_id}`);
+        },
+        async cancelBatchOrders(instrument_id: string, params: {
+          readonly order_ids: [number]
+        }): Promise<any> {
+          return post(`/api/futures/v3/cancel_batch_orders/${instrument_id}`, params);
+        },
+        async getOrders(instrument_id: string, params: {
+          readonly status: number,
+          readonly from?: number,
+          readonly to?: number,
+          readonly limit?: number
+
+        }): Promise<any> {
+          return get(`/api/futures/v3/orders/${instrument_id}?${querystring.stringify(params)}`);
+        },
+        async getOrder(instrument_id: string, order_id: string): Promise<any> {
+          return get(`/api/futures/v3/orders/${instrument_id}/${order_id}`);
+        },
+        async getFills(params: {
+          readonly order_id: string,
+          readonly instrument_id: string,
+          readonly from?: number
+          readonly to?: number
+          readonly limit?: number
+        }): Promise<any> {
+          return get(`/api/futures/v3/fills?${querystring.stringify(params)}`);
+        },
+        
+
       };
     }
   };

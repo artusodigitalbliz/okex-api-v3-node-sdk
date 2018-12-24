@@ -73,7 +73,7 @@ export function PublicClient(
           return get(
             `/api/account/v3/withdrawal/fee${
               currency ? `?currency=${currency}` : ''
-            }`
+              }`
           );
         }
       };
@@ -92,14 +92,14 @@ export function PublicClient(
           return get(
             `/api/futures/v3/instruments/${instrument_id}/book${
               params ? `?${querystring.stringify(params)}` : ''
-            }`
+              }`
           );
         },
         async getTicker(instrument_id?: string): Promise<any> {
           return get(
             `/api/futures/v3/instruments${
               instrument_id ? `/${instrument_id}` : ''
-            }/ticker`
+              }/ticker`
           );
         },
         async getTrades(
@@ -113,7 +113,7 @@ export function PublicClient(
           return get(
             `/api/futures/v3/instruments/${instrument_id}/trades${
               params ? `?${querystring.stringify(params)}` : ''
-            }`
+              }`
           );
         },
         async getCandles(
@@ -127,7 +127,7 @@ export function PublicClient(
           return get(
             `/api/futures/v3/instruments/${instrument_id}/candles${
               params ? `?${querystring.stringify(params)}` : ''
-            }`
+              }`
           );
         },
         async getIndex(instrument_id: string): Promise<any> {
@@ -185,14 +185,14 @@ export function PublicClient(
           return get(
             `/api/swap/v3/instruments/${instrument_id}/depth${
               params ? `?${querystring.stringify(params)}` : ''
-            }`
+              }`
           );
         },
         async getTicker(instrument_id?: string): Promise<any> {
           return get(
             `/api/swap/v3/instruments${
               instrument_id ? `/${instrument_id}` : ''
-            }/ticker`
+              }/ticker`
           );
         },
         async getTrades(
@@ -206,7 +206,7 @@ export function PublicClient(
           return get(
             `/api/swap/v3/instruments/${instrument_id}/trades${
               params ? `?${querystring.stringify(params)}` : ''
-            }`
+              }`
           );
         },
         async getCandles(
@@ -220,7 +220,7 @@ export function PublicClient(
           return get(
             `/api/swap/v3/instruments/${instrument_id}/candles${
               params ? `?${querystring.stringify(params)}` : ''
-            }`
+              }`
           );
         },
         async getIndex(instrument_id: string): Promise<any> {
@@ -271,6 +271,17 @@ export function PublicClient(
             params
           );
         }
+      };
+    },
+    ett(): any {
+      return {
+        getConstituents(ett ?: string): Promise<any> {
+          return get(`/api/ett/v3/constituents${ett ? `/${ett}` : ''}`);
+        },
+        getDefinePrice(ett: string): Promise<any> {
+          return get(`/api/ett/v3/define-price/${ett}`);
+        }
+
       };
     }
   };

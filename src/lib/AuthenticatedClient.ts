@@ -71,6 +71,21 @@ export function AuthenticatedClient(
       .then(res => res.data);
   }
 
+  async function del(
+    url: string,
+    body?: object,
+    params?: object
+  ): Promise<any> {
+    const bodyJson = JSON.stringify(body);
+    return axiosInstance
+      .post(url, body, {
+        headers: { ...getSignature('delete', url, { body: bodyJson }) },
+        params
+      })
+      .then(res => res.data);
+  }
+
+
   return {
     spot(): any {
       return {
@@ -100,7 +115,7 @@ export function AuthenticatedClient(
               readonly side: string;
               readonly margin_trading?: number;
             }
-          ]
+            ]
         ): Promise<any> {
           return post('/api/spot/v3/batch_orders', params);
         },
@@ -116,7 +131,7 @@ export function AuthenticatedClient(
         async postCancelBatchOrders(
           params: [
             { readonly instument_id: string; readonly order_ids: [string] }
-          ]
+            ]
         ): Promise<any> {
           return post(`/api/spot/v3/cancel_batch_orders`, params);
         },
@@ -189,7 +204,7 @@ export function AuthenticatedClient(
           return get(
             `/api/account/v3/withdrawal/history${
               currency ? `/${currency}` : ''
-            }`
+              }`
           );
         },
         async getLedger(params?: {
@@ -202,7 +217,7 @@ export function AuthenticatedClient(
           return get(
             `/api/account/v3/ledger${
               params ? `?${querystring.stringify(params)}` : ''
-            }`
+              }`
           );
         },
         async getAddress(params: { readonly currency: string }): Promise<any> {
@@ -223,7 +238,7 @@ export function AuthenticatedClient(
           return get(
             `/api/futures/v3${
               instrument_id ? `/${instrument_id}` : ''
-            }/position`
+              }/position`
           );
         },
         async getAccounts(currency?: string): Promise<any> {
@@ -248,7 +263,7 @@ export function AuthenticatedClient(
           return get(
             `/api/futures/v3/accounts/${currency}/ledger${
               params ? `?${querystring.stringify(params)}` : ''
-            }`
+              }`
           );
         },
         async postOrder(params: {
@@ -403,6 +418,43 @@ export function AuthenticatedClient(
         }): Promise<any> {
           return get(`/api/swap/v3/fills?${querystring.stringify(params)}`);
         }
+      };
+    },
+    ett(): any {
+      return {
+        getAccounts(currency?: string): Promise<any> {
+          return get(`/api/ett/v3/accounts${currency ? `/${currency}` : ''}`);
+        },
+        getAccountsLedger(currency: string): Promise<any> {
+          return get(`/api/ett/v3/accounts/${currency}/ledger`);
+        },
+        postOrder(params: {
+          readonly client_oid?: string,
+          readonly type: string,
+          readonly quote_currency: string,
+          readonly amount: string,
+          readonly size: string,
+          readonly ett: string,
+        }): Promise<any> {
+          return post('/api/ett/v3/orders', params);
+        },
+        deleteOrder(order_id: string): Promise<any> {
+          return del(`/api/ett/v3/orders/${order_id}`);
+        },
+        getOrders(params: {
+          readonly status: string,
+          readonly ett: string,
+          readonly type: string,
+          readonly from: string,
+          readonly to: string,
+          readonly limit: string,
+        }): Promise<any> {
+          return get(`/api/ett/v3/orders?${querystring.stringify(params)}`);
+        },
+        getOrder(order_id: string): Promise<any> {
+          return get(`/api/ett/v3/orders/${order_id}`);
+        }
+
       };
     }
   };

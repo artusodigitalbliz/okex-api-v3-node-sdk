@@ -72,87 +72,150 @@ export function AuthenticatedClient(
   }
 
   return {
-    async getSpotAccounts(currency?: string): Promise<any> {
-      return currency
-        ? get(`/api/spot/v3/accounts/${currency}`)
-        : get('/api/spot/v3/accounts');
-    },
-    async getSpotLedger(currency: string): Promise<any> {
-      return get(`/api/spot/v3/accounts/${currency}/ledger`);
-    },
-    async postSpotOrder(params: {
-      readonly instrument_id: string;
-      readonly client_oid?: string;
-      readonly type: string;
-      readonly side: string;
-      readonly margin_trading?: number;
-    }): Promise<any> {
-      return post('/api/spot/v3/orders', params);
-    },
-    async postSpotBatchOrders(
-      params: [
-        {
+    spot(): any {
+      return {
+        async getAccounts(currency?: string): Promise<any> {
+          return currency
+            ? get(`/api/spot/v3/accounts/${currency}`)
+            : get('/api/spot/v3/accounts');
+        },
+        async getLedger(currency: string): Promise<any> {
+          return get(`/api/spot/v3/accounts/${currency}/ledger`);
+        },
+        async postOrder(params: {
           readonly instrument_id: string;
           readonly client_oid?: string;
           readonly type: string;
           readonly side: string;
           readonly margin_trading?: number;
+        }): Promise<any> {
+          return post('/api/spot/v3/orders', params);
+        },
+        async postBatchOrders(
+          params: [
+            {
+              readonly instrument_id: string;
+              readonly client_oid?: string;
+              readonly type: string;
+              readonly side: string;
+              readonly margin_trading?: number;
+            }
+          ]
+        ): Promise<any> {
+          return post('/api/spot/v3/batch_orders', params);
+        },
+        async postCancelOrder(
+          order_id: string,
+          params: {
+            readonly instrument_d: string;
+            readonly client_oid?: string;
+          }
+        ): Promise<any> {
+          return post(`/api/spot/v3/cancel_orders/${order_id}`, params);
+        },
+        async postCancelBatchOrders(
+          params: [
+            { readonly instument_id: string; readonly order_ids: [string] }
+          ]
+        ): Promise<any> {
+          return post(`/api/spot/v3/cancel_batch_orders`, params);
+        },
+        async getOrders(params: {
+          readonly status: string;
+          readonly instument_id: string;
+          readonly from?: string;
+          readonly to?: string;
+          readonly limit?: string;
+        }): Promise<any> {
+          return get(`/api/spot/v3/orders?` + querystring.stringify(params));
+        },
+        async getOrdersPending(params?: {
+          readonly from?: string;
+          readonly to?: string;
+          readonly limit?: string;
+          readonly instrument_id?: string;
+        }): Promise<any> {
+          return get(
+            `/api/spot/v3/orders_pending` + params
+              ? `?${querystring.stringify(params)}`
+              : ''
+          );
+        },
+        async getOrder(
+          order_id: string,
+          params: { readonly instrument_id: string }
+        ): Promise<any> {
+          return get(
+            `/api/spot/v3/orders/${order_id}?` + querystring.stringify(params)
+          );
+        },
+        async getFills(params: {
+          readonly order_id: string;
+          readonly instument_id: string;
+          readonly from?: string;
+          readonly to?: string;
+          readonly limit?: string;
+        }): Promise<any> {
+          return get(`/api/spot/v3/fills?${querystring.stringify(params)}`);
         }
-      ]
-    ): Promise<any> {
-      return post('/api/spot/v3/batch_orders', params);
+      };
     },
-    async postSpotCancelOrder(
-      order_id: string,
-      params: {
-        readonly instrument_d: string;
-        readonly client_oid?: string;
-      }
-    ): Promise<any> {
-      return post(`/api/spot/v3/cancel_orders/${order_id}`, params);
-    },
-    async postSpotCancelBatchOrders(
-      params: [{ readonly instument_id: string; readonly order_ids: [string] }]
-    ): Promise<any> {
-      return post(`/api/spot/v3/cancel_batch_orders`, params);
-    },
-    async getSpotOrders(params: {
-      readonly status: string;
-      readonly instument_id: string;
-      readonly from?: string;
-      readonly to?: string;
-      readonly limit?: string;
-    }): Promise<any> {
-      return get(`/api/spot/v3/orders?` + querystring.stringify(params));
-    },
-    async getSpotOrdersPending(params?: {
-      readonly from?: string;
-      readonly to?: string;
-      readonly limit?: string;
-      readonly instrument_id?: string;
-    }): Promise<any> {
-      return get(
-        `/api/spot/v3/orders_pending` + params
-          ? `?${querystring.stringify(params)}`
-          : ''
-      );
-    },
-    async getSpotOrder(
-      order_id: string,
-      params: { readonly instrument_id: string }
-    ): Promise<any> {
-      return get(
-        `/api/spot/v3/orders/${order_id}?` + querystring.stringify(params)
-      );
-    },
-    async getSpotFills(params: {
-      readonly order_id: string;
-      readonly instument_id: string;
-      readonly from?: string;
-      readonly to?: string;
-      readonly limit?: string;
-    }): Promise<any> {
-      return get(`/api/spot/v3/fills?${querystring.stringify(params)}`);
+    account(): any {
+      return {
+        async getWallet(currency?: string): Promise<any> {
+          return get(`/api/account/v3/wallet${currency ? `/${currency}` : ''}`);
+        },
+        async postTransfer(params: {
+          readonly currency: string;
+          readonly amount: number;
+          readonly from: number;
+          readonly to: number;
+          readonly sub_account?: string;
+          readonly instument_id?: string;
+        }): Promise<any> {
+          return post('/api/account/v3/transfer', params);
+        },
+        async postWithdrawal(params: {
+          readonly currency: string;
+          readonly amount: string;
+          readonly destination: number;
+          readonly to_address: string;
+          readonly trade_pwd: string;
+          readonly fee: number;
+        }): Promise<any> {
+          return post('/api/account/v3/withdrawal', params);
+        },
+        async getWithdrawalHistory(currency?: string): Promise<any> {
+          return get(
+            `/api/account/v3/withdrawal/history${
+              currency ? `/${currency}` : ''
+            }`
+          );
+        },
+        async getLedger(params?: {
+          readonly currency?: string;
+          readonly type?: number;
+          readonly from?: number;
+          readonly to?: number;
+          readonly limit?: number;
+        }): Promise<any> {
+          return get(
+            `/api/account/v3/ledger${
+              params ? `?${querystring.stringify(params)}` : ''
+            }`
+          );
+        },
+        async getAddress(params: { readonly currency: string }): Promise<any> {
+          return get(
+            `/api/account/v3/deposit/address?${querystring.stringify(params)}`
+          );
+        },
+        async getDepositHistory(currency?: string): Promise<any> {
+          return get(
+            `/api/account/v3/deposit/history${currency ? `/${currency}` : ''}`
+          );
+        }
+      };
     }
   };
 }

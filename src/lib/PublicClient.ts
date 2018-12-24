@@ -170,6 +170,108 @@ export function PublicClient(
           return get(`/api/futures/v3/accounts/${instrument_id}/holds`);
         }
       };
+    },
+    swap(): any {
+      return {
+        async getInstruments(): Promise<any> {
+          return get('/api/swap/v3/instruments');
+        },
+        async getDepth(
+          instrument_id: string,
+          params: {
+            readonly size: string;
+          }
+        ): Promise<any> {
+          return get(
+            `/api/swap/v3/instruments/${instrument_id}/depth${
+              params ? `?${querystring.stringify(params)}` : ''
+            }`
+          );
+        },
+        async getTicker(instrument_id?: string): Promise<any> {
+          return get(
+            `/api/swap/v3/instruments${
+              instrument_id ? `/${instrument_id}` : ''
+            }/ticker`
+          );
+        },
+        async getTrades(
+          instrument_id: string,
+          params?: {
+            readonly from?: string;
+            readonly to?: string;
+            readonly limit?: string;
+          }
+        ): Promise<any> {
+          return get(
+            `/api/swap/v3/instruments/${instrument_id}/trades${
+              params ? `?${querystring.stringify(params)}` : ''
+            }`
+          );
+        },
+        async getCandles(
+          instrument_id: string,
+          params?: {
+            readonly start?: string;
+            readonly end?: string;
+            readonly granularity?: string;
+          }
+        ): Promise<any> {
+          return get(
+            `/api/swap/v3/instruments/${instrument_id}/candles${
+              params ? `?${querystring.stringify(params)}` : ''
+            }`
+          );
+        },
+        async getIndex(instrument_id: string): Promise<any> {
+          return get(`/api/swap/v3/instruments/${instrument_id}/index`);
+        },
+        async getRate(): Promise<any> {
+          return get('/api/swap/v3/rate');
+        },
+        async getOpenInterest(instrument_id: string): Promise<any> {
+          return get(`/api/swap/v3/instruments/${instrument_id}/open_interest`);
+        },
+        async getPriceLimit(instrument_id: string): Promise<any> {
+          return get(`/api/swap/v3/instruments/${instrument_id}/price_limit`);
+        },
+        async getLiquidation(
+          instrument_id: string,
+          params: {
+            readonly status: string;
+            readonly from?: string;
+            readonly to?: string;
+            readonly limit?: string;
+          }
+        ): Promise<any> {
+          return get(
+            `/api/swap/v3/instruments/${instrument_id}/liquidation`,
+            params
+          );
+        },
+        async getHolds(instrument_id: string): Promise<any> {
+          return get(`/api/swap/v3/instruments/${instrument_id}/holds`);
+        },
+        async getFundingTime(instrument_id: string): Promise<any> {
+          return get(`/api/swap/v3/instruments/${instrument_id}/funding_time`);
+        },
+        async getMarkPrice(instrument_id: string): Promise<any> {
+          return get(`/api/swap/v3/instruments/${instrument_id}/mark_price`);
+        },
+        async getHistoricalFudingRate(
+          instrument_id: string,
+          params: {
+            readonly from?: string;
+            readonly to?: string;
+            readonly limit?: string;
+          }
+        ): Promise<any> {
+          return get(
+            `/api/swap/v3/instruments/${instrument_id}/historical_funding_rate`,
+            params
+          );
+        }
+      };
     }
   };
 }

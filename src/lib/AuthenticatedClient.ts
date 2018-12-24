@@ -317,6 +317,93 @@ export function AuthenticatedClient(
           return get(`/api/futures/v3/fills?${querystring.stringify(params)}`);
         }
       };
+    },
+    swap(): any {
+      return {
+        async getPosition(instrument_id: string): Promise<any> {
+          return get(`/api/swap/v3/${instrument_id}/position`);
+        },
+        async getAccount(instrument_id?: string): Promise<any> {
+          return get(
+            `/api/swap/v3${instrument_id ? `/${instrument_id}` : ''}/accounts`
+          );
+        },
+        async getSettings(instrument_id: string): Promise<any> {
+          return get(`/api/swap/v3/accounts/${instrument_id}/settings`);
+        },
+        async postLeverage(
+          instrument_id: string,
+          params: {
+            readonly leverage: string;
+            readonly side: string;
+          }
+        ): Promise<any> {
+          return post(
+            `/api/swap/v3/accounts/${instrument_id}/leverage`,
+            params
+          );
+        },
+        async getLedger(instrument_id: string): Promise<any> {
+          return get(`/api/swap/v3/accounts/${instrument_id}/ledger`);
+        },
+        async postOrder(params: {
+          readonly client_oid?: string;
+          readonly size: string;
+          readonly type: string;
+          readonly match_price?: string;
+          readonly price: string;
+          readonly instruemnt_id: string;
+        }): Promise<any> {
+          return post('/api/swap/v3/order', params);
+        },
+        async postBatchOrder(params: {
+          readonly instrument_id: string;
+          readonly order_data: string;
+        }): Promise<any> {
+          return post('/api/swap/v3/orders', params);
+        },
+        async postCancelOrder(
+          instrument_id: string,
+          order_id: string
+        ): Promise<any> {
+          return post(`/api/swap/v3/cancel_order/${instrument_id}/${order_id}`);
+        },
+
+        async postCancelBatchOrder(
+          instrument_id: string,
+          params: {
+            readonly ids: [string];
+          }
+        ): Promise<any> {
+          return post(
+            `/api/swap/v3/cancel_batch_orders/${instrument_id}`,
+            params
+          );
+        },
+        async getOrders(
+          instrument_id: string,
+          params: {
+            readonly status: string;
+            readonly from?: string;
+            readonly to?: string;
+            readonly limit?: string;
+          }
+        ): Promise<any> {
+          return get(`/api/swap/v3/orders/${instrument_id}`, params);
+        },
+        async getOrder(instrument_id: string, order_id: string): Promise<any> {
+          return get(`/api/swap/v3/orders/${instrument_id}/${order_id}`);
+        },
+        async getFills(params: {
+          readonly order_id: string;
+          readonly instrument_id: string;
+          readonly from?: string;
+          readonly to?: string;
+          readonly limit?: string;
+        }): Promise<any> {
+          return get(`/api/swap/v3/fills?${querystring.stringify(params)}`);
+        }
+      };
     }
   };
 }

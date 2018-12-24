@@ -64,7 +64,7 @@ export function AuthenticatedClient(
     const bodyJson = JSON.stringify(body);
     return axiosInstance
       .post(url, body, {
-        headers: { ...getSignature('get', url, { body: bodyJson }) },
+        headers: { ...getSignature('post', url, { body: bodyJson }) },
         params
       })
       .then(res => res.data);

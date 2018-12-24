@@ -25,7 +25,7 @@ export function AuthenticatedClient(
     // tslint:disable:no-let
     // tslint:disable:no-expression-statement
     const timestamp = new Date().toISOString();
-    const what = timestamp + method.toUpperCase() + path + options.body || '';
+    const what = timestamp + method.toUpperCase() + path + (options.body || '');
     const hmac = crypto.createHmac('sha256', secret);
     const signature = hmac.update(what).digest('base64');
     return {

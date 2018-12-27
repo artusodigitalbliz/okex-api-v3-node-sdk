@@ -1,6 +1,6 @@
 {
   "name": "@okfe/okex-node",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "description": "The Node.js library for OKEx V3 API.",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",

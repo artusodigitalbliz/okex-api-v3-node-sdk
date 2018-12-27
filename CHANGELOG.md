@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.0.35"></a>
+## [0.0.35](https://github.com/okcoin-okex/okex-api-v3-node-sdk/compare/v0.0.34...v0.0.35) (2018-12-27)
+
+
+
+<a name="0.0.34"></a>
+## [0.0.34](https://github.com/okcoin-okex/okex-api-v3-node-sdk/compare/v0.0.33...v0.0.34) (2018-12-27)
+
+
+
+<a name="0.0.33"></a>
+## [0.0.33](https://github.com/kamma-cc/okex-node/compare/v0.0.32...v0.0.33) (2018-12-27)
+
+
+
 <a name="0.0.32"></a>
 ## [0.0.32](https://github.com/kamma-cc/okex-node/compare/v0.0.31...v0.0.32) (2018-12-27)
 

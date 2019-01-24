@@ -150,9 +150,9 @@ export function AuthenticatedClient(
           readonly instrument_id?: string;
         }): Promise<any> {
           return get(
-            `/api/spot/v3/orders_pending` + params
-              ? `?${querystring.stringify(params)}`
-              : ''
+            `/api/spot/v3/orders_pending${
+              params ? `?${querystring.stringify(params)}` : ''
+            }`
           );
         },
         async getOrder(

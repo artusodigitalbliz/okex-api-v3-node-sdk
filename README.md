@@ -50,8 +50,7 @@ spot().getSpotBook(instrument_id, params)| 获取深度数据
 spot().getSpotTicker(instrument_id)|	获取tiker信息
 spot().getSpotTrade(instrument_id, params)|获取成交数据
 spot().getSpotCandles(instrument_id, params)|获取k线数据
-account().getCurrencies()	|获取币种列表
-account().getWithdrawalFee()	|提币接口
+
 
 
 <mark>交割合约API</mark>
@@ -126,6 +125,8 @@ spot().getFills(params)  |	获取成交明细
 
 接口  | 说明
 ------------- | -------------
+account().getCurrencies()	|获取币种列表
+account().getWithdrawalFee()	|提币接口
 account().getWallet(currency)	|钱包账户信息
 account().postTransfer(params)	|资金划转
 account().postWithdrawal(params)	|提币

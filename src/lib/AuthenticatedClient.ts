@@ -176,6 +176,16 @@ export function AuthenticatedClient(
     },
     account(): any {
       return {
+        async getCurrencies(): Promise<any> {
+          return get('/api/account/v3/currencies');
+        },
+        async getWithdrawalFee(currency?: string): Promise<any> {
+          return get(
+            `/api/account/v3/withdrawal/fee${
+              currency ? `?currency=${currency}` : ''
+            }`
+          );
+        },
         async getWallet(currency?: string): Promise<any> {
           return get(`/api/account/v3/wallet${currency ? `/${currency}` : ''}`);
         },

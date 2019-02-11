@@ -64,9 +64,462 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="okex-node">okex-node</h1>
-				<p><img src="https://img.shields.io/npm/v/@okfe/okex-node.svg?style=flat" alt="npm version"></p>
-				<p>The Node.js library for OKEx V3 API.</p>
+				<p><strong><em>apikey</em></strong>相关申请和修改，请在登录 <strong><em>”<a href="http://www.okex.com%E2%80%9D">www.okex.com”</a></em></strong>成功后，“<strong><em>账户-个人中心-我的API</em></strong>”申请V3 API页面进行相关操作。</p>
+				<p>###安装方法
+					npm i @okfe/okex-node
+				使用指南</p>
+				<pre><code><span class="hljs-keyword">const</span> { PublicClient } = <span class="hljs-built_in">require</span>(‘@okfe/okex-node’);
+<span class="hljs-keyword">const</span> { V3WebsocketClient } = <span class="hljs-built_in">require</span>(‘@okfe/okex-node’);
+<span class="hljs-keyword">const</span> { AuthenticatedClient } = <span class="hljs-built_in">require</span>(‘@okfe/okex-node’);
+<span class="hljs-keyword">const</span> pClient = <span class="hljs-keyword">new</span> PublicClient();
+onst authClient = <span class="hljs-keyword">new</span> AuthenticatedClient(key,secret, passphrase);
+<span class="hljs-keyword">const</span> wss = <span class="hljs-keyword">new</span> V3WebsocketClient();</code></pre><h3 id="api-">API指南</h3>
+				<p><strong><em>WebSocket</em></strong>行情订阅和推送，交易推送API，对应的源码文件是
+				<strong><em>WebsocketClient.js</em></strong></p>
+				<p>用法如：</p>
+				<pre><code><span class="hljs-selector-tag">wss</span><span class="hljs-selector-class">.connect</span>();
+<span class="hljs-selector-tag">wss</span><span class="hljs-selector-class">.login</span>(key, secret,passpharase )
+<span class="hljs-selector-tag">wss</span><span class="hljs-selector-class">.subscribe</span>(‘spot/<span class="hljs-attribute">depth5</span>:ETH-USDT’);</code></pre><table>
+					<thead>
+						<tr>
+							<th>接口</th>
+							<th>说明</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>connect()</td>
+							<td>websocket连接</td>
+						</tr>
+						<tr>
+							<td>subscribe(..args)</td>
+							<td>行情订阅</td>
+						</tr>
+						<tr>
+							<td>unsubscribe(...args)</td>
+							<td>取消行情订阅</td>
+						</tr>
+						<tr>
+							<td>checksum(data)</td>
+							<td>检查数据有效性</td>
+						</tr>
+				</tbody></table>
+				<h2 id="-a-name-markdown-pane-a-"><a name="markdown-pane"></a></h2>
+				<p><strong><em>HTTP</em></strong>接口部分是下单，撤单等操作</p>
+				<p><strong><em>PublicClient.js</em></strong>是无需登录即可获取的数据接口，</p>
+				<p>用法实例如:</p>
+				<pre><code>pClient.spot().getSpotBook(‘<span class="hljs-keyword">BTC-USDT’, </span>{‘size’:’<span class="hljs-number">10</span>’})<span class="hljs-comment">;</span></code></pre><p><mark>币币API</mark></p>
+				<table>
+					<thead>
+						<tr>
+							<th>接口</th>
+							<th>说明</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>spot().getSpotInstruments()</td>
+							<td>获取币对信息</td>
+						</tr>
+						<tr>
+							<td>spot().getSpotBook(instrument_id, params)</td>
+							<td>获取深度数据</td>
+						</tr>
+						<tr>
+							<td>spot().getSpotTicker(instrument_id)</td>
+							<td>获取tiker信息</td>
+						</tr>
+						<tr>
+							<td>spot().getSpotTrade(instrument_id, params)</td>
+							<td>获取成交数据</td>
+						</tr>
+						<tr>
+							<td>spot().getSpotCandles(instrument_id, params)</td>
+							<td>获取k线数据</td>
+						</tr>
+				</tbody></table>
+				<p><mark>交割合约API</mark></p>
+				<table>
+					<thead>
+						<tr>
+							<th>接口</th>
+							<th>说明</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>futures().getInstruments()</td>
+							<td>交割合约信息</td>
+						</tr>
+						<tr>
+							<td>futures().getBook(instrument_id, params)</td>
+							<td>获取交割合约深度信息</td>
+						</tr>
+						<tr>
+							<td>futures().getTicker(instrument_id))</td>
+							<td>获取ticker信息</td>
+						</tr>
+						<tr>
+							<td>futures().getTrades(instrument_id, params)</td>
+							<td>获取成交数据</td>
+						</tr>
+						<tr>
+							<td>futures().getCandles(instrument_id, params)</td>
+							<td>获取k线数据</td>
+						</tr>
+						<tr>
+							<td>futures().getIndex(instrument_id)</td>
+							<td>获取指数信息</td>
+						</tr>
+						<tr>
+							<td>futures().getRate()</td>
+							<td>获取法币汇率</td>
+						</tr>
+						<tr>
+							<td>futures().getEstimatedPrice(instrument_id)</td>
+							<td>获取预估交割价</td>
+						</tr>
+						<tr>
+							<td>futures().getOpenInterest(instrument_id)</td>
+							<td>获取平台总持仓量</td>
+						</tr>
+						<tr>
+							<td>futures().getPriceLimit(instrument_id)</td>
+							<td>获取当前限价</td>
+						</tr>
+						<tr>
+							<td>futrue().getLiquidation(instrument_id, params)</td>
+							<td>获取爆仓单</td>
+						</tr>
+						<tr>
+							<td>future().getHolds(instrument)</td>
+							<td>获取合约挂单冻结数量</td>
+						</tr>
+				</tbody></table>
+				<p><mark>永续合约API</mark></p>
+				<table>
+					<thead>
+						<tr>
+							<th>接口</th>
+							<th>说明</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>swap().getInstruments()</td>
+							<td>合约信息</td>
+						</tr>
+						<tr>
+							<td>swap().getDepth()</td>
+							<td>深度信息</td>
+						</tr>
+						<tr>
+							<td>swap().getTicker()</td>
+							<td>Tiker信息</td>
+						</tr>
+						<tr>
+							<td>swap().getTrades(instrument_id, params)</td>
+							<td>获取成交数据</td>
+						</tr>
+						<tr>
+							<td>swap().getCandles(instrument_id, params)</td>
+							<td>获取k线数据</td>
+						</tr>
+						<tr>
+							<td>swap().getIndex(instrument_id)</td>
+							<td>获取指数信息</td>
+						</tr>
+						<tr>
+							<td>swap().getRate()</td>
+							<td>获取法币汇率</td>
+						</tr>
+						<tr>
+							<td>swap().getOpenInterest(instrument_id)</td>
+							<td>获取平台总持仓量</td>
+						</tr>
+						<tr>
+							<td>swap().getPriceLimit(instrument_id)</td>
+							<td>获取当前限价</td>
+						</tr>
+						<tr>
+							<td>swap().getLiquidation(instrument_id, params)</td>
+							<td>获取爆仓单</td>
+						</tr>
+						<tr>
+							<td>swap().getHolds(instrument)</td>
+							<td>获取合约挂单冻结数量</td>
+						</tr>
+						<tr>
+							<td>swap().getFundingTime(instrument_id)</td>
+							<td>获取成交数据</td>
+						</tr>
+						<tr>
+							<td>swap().getMarkPrice(instrument_id)</td>
+							<td>获取k线数据</td>
+						</tr>
+						<tr>
+							<td>swap().getHistoricalFudingRate(instrument_id, params)</td>
+							<td>获取合约历史资金费率</td>
+						</tr>
+				</tbody></table>
+				<p><mark>ETT API</mark></p>
+				<table>
+					<thead>
+						<tr>
+							<th>接口</th>
+							<th>说明</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>ett().getConstituents(ett)</td>
+							<td>获取组合成分</td>
+						</tr>
+						<tr>
+							<td>ett().getDefinePrice(ett)</td>
+							<td>获取ETT清算历史定价</td>
+						</tr>
+				</tbody></table>
+				<hr>
+				<p><strong>AuthenticatedClient.js</strong>是需要登录验证才可以调用的接口，包括下单，撤单等</p>
+				<p>用法实例如下：</p>
+				<pre><code>authClient.spot<span class="hljs-literal">()</span>.get<span class="hljs-constructor">Accounts()</span>;
+authClient.swap<span class="hljs-literal">()</span>.post<span class="hljs-constructor">Order({“<span class="hljs-params">match_price</span>”:”1”, “<span class="hljs-params">price</span>”:”109”,”<span class="hljs-params">type</span>”:”1”, “<span class="hljs-params">instrument_id</span>”:”BTC-USD_SWAP”})</span>;</code></pre><p><mark>币币API相关</mark></p>
+				<table>
+					<thead>
+						<tr>
+							<th>接口</th>
+							<th>说明</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>spot().getAccounts(currency)</td>
+							<td>币币账户信息</td>
+						</tr>
+						<tr>
+							<td>spot().getLedger(currency)</td>
+							<td>账单流水</td>
+						</tr>
+						<tr>
+							<td>spot().postOrder(params)</td>
+							<td>下单</td>
+						</tr>
+						<tr>
+							<td>spot().postBatchOrders(params)</td>
+							<td>批量下单</td>
+						</tr>
+						<tr>
+							<td>spot().postCancelOrder(order_id, params)</td>
+							<td>撤销指定订单</td>
+						</tr>
+						<tr>
+							<td>spot().postCancelBatchOrders(params)</td>
+							<td>批量撤销订单</td>
+						</tr>
+						<tr>
+							<td>spot().getOrders(params)</td>
+							<td>获取订单列表</td>
+						</tr>
+						<tr>
+							<td>spot().getOrdersPending(params)</td>
+							<td>获取所有未成交订单</td>
+						</tr>
+						<tr>
+							<td>spot().getOrder(order_id, params)</td>
+							<td>获取订单信息</td>
+						</tr>
+						<tr>
+							<td>spot().getFills(params)</td>
+							<td>获取成交明细</td>
+						</tr>
+				</tbody></table>
+				<p><mark>账户API相关</mark></p>
+				<table>
+					<thead>
+						<tr>
+							<th>接口</th>
+							<th>说明</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>account().getCurrencies()</td>
+							<td>获取币种列表</td>
+						</tr>
+						<tr>
+							<td>account().getWithdrawalFee()</td>
+							<td>提币接口</td>
+						</tr>
+						<tr>
+							<td>account().getWallet(currency)</td>
+							<td>钱包账户信息</td>
+						</tr>
+						<tr>
+							<td>account().postTransfer(params)</td>
+							<td>资金划转</td>
+						</tr>
+						<tr>
+							<td>account().postWithdrawal(params)</td>
+							<td>提币</td>
+						</tr>
+						<tr>
+							<td>account().getWithdrawalHistory(currency)</td>
+							<td>查询最近的提币记录</td>
+						</tr>
+						<tr>
+							<td>account().getLedger(params)</td>
+							<td>账单流水查询</td>
+						</tr>
+						<tr>
+							<td>account().getAddress(params)</td>
+							<td>获取充值地址</td>
+						</tr>
+						<tr>
+							<td>account().getDepositHistory(currency)</td>
+							<td>获取所有币种/单个 充值记录</td>
+						</tr>
+				</tbody></table>
+				<p><mark>交割合约API相关</mark></p>
+				<table>
+					<thead>
+						<tr>
+							<th>接口</th>
+							<th>说明</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>futures().getPosition(instrument_id)</td>
+							<td>所有合约/单个合约持仓信息</td>
+						</tr>
+						<tr>
+							<td>futures().getAccounts(currency)</td>
+							<td>所有合约/单个合约账户信息 </td>
+						</tr>
+						<tr>
+							<td>futures().getLeverage(currency)</td>
+							<td>获取合约币种杠杆倍数</td>
+						</tr>
+						<tr>
+							<td>Futures().postLeverage(currency, params)</td>
+							<td>设定合约币种杠杆倍数</td>
+						</tr>
+						<tr>
+							<td>futures().getAccountsLedger(currency, params)</td>
+							<td>账单流水查询</td>
+						</tr>
+						<tr>
+							<td>futures().postOrder(params)</td>
+							<td>下单</td>
+						</tr>
+						<tr>
+							<td>futures().postOrders(params)</td>
+							<td>批量下单</td>
+						</tr>
+						<tr>
+							<td>futures().cancelOrder(instrument_id, order_id)</td>
+							<td>撤销指定订单</td>
+						</tr>
+						<tr>
+							<td>futures().cancrdelBatchOers(instrument_id, params)</td>
+							<td>批量撤销订单</td>
+						</tr>
+						<tr>
+							<td>futures().getOrders(instrument_id, params)</td>
+							<td>获取订单列表</td>
+						</tr>
+						<tr>
+							<td>futures().getOrder(instrument_id, order_id)</td>
+							<td>获取订单信息</td>
+						</tr>
+						<tr>
+							<td>futures().getFills(params)</td>
+							<td>获取成交明细</td>
+						</tr>
+				</tbody></table>
+				<p><mark>永续合约API</mark></p>
+				<table>
+					<thead>
+						<tr>
+							<th>接口</th>
+							<th>说明</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>swap().getPosition(instrument_id)</td>
+							<td>所有合约/单个合约持仓信息</td>
+						</tr>
+						<tr>
+							<td>swap().getAccount(instrument_id)</td>
+							<td>所有币种/单个币账户信息</td>
+						</tr>
+						<tr>
+							<td>swap().getSettings(instrument_id)</td>
+							<td>获取某个合约的用户配置</td>
+						</tr>
+						<tr>
+							<td>swap().postLeverage(instrument_id, params)</td>
+							<td>设定某个合约的杠杆</td>
+						</tr>
+						<tr>
+							<td>swap().getLedger(instrument_id)</td>
+							<td>账单流水查询</td>
+						</tr>
+						<tr>
+							<td>swap().postOrder(params)</td>
+							<td>下单</td>
+						</tr>
+						<tr>
+							<td>swap().postBatchOrder(params)</td>
+							<td>批量下单</td>
+						</tr>
+						<tr>
+							<td>swap().postCancelOrder(instrument_id, order_id)</td>
+							<td>撤单</td>
+						</tr>
+						<tr>
+							<td>swap().postCancelBatchOrder(instrument_id, params)</td>
+							<td>批量撤销订单</td>
+						</tr>
+						<tr>
+							<td>swap().getOrders(instrument_id, params)</td>
+							<td>获取所有订单列表</td>
+						</tr>
+						<tr>
+							<td>swap().getFills(params)</td>
+							<td>获取成交明细</td>
+						</tr>
+						<tr>
+							<td>swap().getOrder(instrument_id, order_id)</td>
+							<td>获取订单信息</td>
+						</tr>
+				</tbody></table>
+				<p><mark>ETT API</mark></p>
+				<table>
+					<thead>
+						<tr>
+							<th>接口</th>
+							<th>说明</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>ett().getAccounts(currency)</td>
+							<td>组合/单一币种账户信息</td>
+						</tr>
+						<tr>
+							<td>ett().getAccountsLedger(currency)</td>
+							<td>账单流水查询</td>
+						</tr>
+						<tr>
+							<td>ett().postOrder(currency)</td>
+							<td>下单</td>
+						</tr>
+						<tr>
+							<td>ett().deleteOrder(order_id)</td>
+							<td>撤销指定订单</td>
+						</tr>
+						<tr>
+							<td>ett().getOrders(params)</td>
+							<td>获取订单列表</td>
+						</tr>
+						<tr>
+							<td>ett().getOrder(order_id)</td>
+							<td>获取订单信息</td>
+						</tr>
+				</tbody></table>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

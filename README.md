@@ -48,8 +48,8 @@ checksum(data)	| 检查数据有效性
 spot().getSpotInstruments()	| 获取币对信息
 spot().getSpotBook(instrument_id, params)| 获取深度数据
 spot().getSpotTicker(instrument_id)|	获取tiker信息
-Spot().getSpotTrade(instrument_id, params)|获取成交数据
-Spot().getSpotCandles(instrument_id, params)|获取k线数据
+spot().getSpotTrade(instrument_id, params)|获取成交数据
+spot().getSpotCandles(instrument_id, params)|获取k线数据
 account().getCurrencies()	|获取币种列表
 account().getWithdrawalFee()	|提币接口
 

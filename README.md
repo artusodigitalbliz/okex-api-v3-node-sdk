@@ -1,6 +1,8 @@
-**apikey**相关申请和修改，请在登录 **”www.okex.com”**成功后，“**账户-个人中心-我的API**”申请V3 API页面进行相关操作。
+**apikey**相关申请和修改，请在登录 **"www.okex.com"**成功后，"**账户-个人中心-我的API**"申请V3 API页面进行相关操作。
 ###安装方法
+
 	npm i @okfe/okex-node
+	
 使用指南
 
 	const { PublicClient } = require(‘@okfe/okex-node’);

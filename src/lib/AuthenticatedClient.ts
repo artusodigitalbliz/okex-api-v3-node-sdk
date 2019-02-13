@@ -264,7 +264,7 @@ export function AuthenticatedClient(
             ? get(`/api/margin/v3/accounts/${instrument_id}/availability`)
             : get(`/api/margin/v3/accounts/availability`);
         },
-        async getborrowed(
+        async getBorrowed(
           instrument_id: string,
           params?: {
             readonly status?: number;

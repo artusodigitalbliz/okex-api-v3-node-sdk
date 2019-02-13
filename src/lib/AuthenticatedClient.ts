@@ -249,6 +249,136 @@ export function AuthenticatedClient(
         }
       };
     },
+    margin(): any {
+      return {
+        async getAccounts(currency?: string): Promise<any> {
+          return currency
+            ? get(`/api/margin/v3/accounts/${currency}`)
+            : get('/api/margin/v3/accounts');
+        },
+        async getLedger(currency: string): Promise<any> {
+          return get(`/api/margin/v3/accounts/${currency}/ledger`);
+        },
+        async getAvailability(instrument_id?: string): Promise<any> {
+          return instrument_id
+            ? get(`/api/margin/v3/accounts/${instrument_id}/availability`)
+            : get(`/api/margin/v3/accounts/availability`);
+        },
+        async getborrowed(
+          instrument_id: string,
+          params?: {
+            readonly status?: number;
+            readonly limit?: number;
+            readonly from?: number;
+            readonly to?: number;
+          }
+        ): Promise<any> {
+          return instrument_id
+            ? get(
+                `/api/margin/v3/accounts/${instrument_id}/borrowed${
+                  params ? `?${querystring.stringify(params)}` : ''
+                }`
+              )
+            : get(
+                `/api/margin/v3/accounts/borrowed${
+                  params ? `?${querystring.stringify(params)}` : ''
+                }`
+              );
+        },
+        async postBorrow(params?: {
+          readonly instrument_id?: string;
+          readonly currency?: number;
+          readonly amount?: number;
+        }): Promise<any> {
+          return post(`/api/margin/v3/accounts/borrow`, params);
+        },
+        async postRepayment(params?: {
+          readonly instrument_id?: string;
+          readonly currency?: number;
+          readonly amount?: number;
+          readonly borrow_id?: string;
+        }): Promise<any> {
+          return post(`/api/margin/v3/accounts/repayment`, params);
+        },
+        async postOrder(params?: {
+          readonly client_oid?: string;
+          readonly instrument_id?: string;
+          readonly side?: string;
+          readonly type?: string;
+          readonly size?: string;
+          readonly notional?: string;
+          readonly margin_trading?: number;
+        }): Promise<any> {
+          return post(`/api/margin/v3/orders`, params);
+        },
+        async postBatchOrder(params?: {
+          readonly client_oid?: string;
+          readonly instrument_id?: string;
+          readonly side?: string;
+          readonly type?: string;
+          readonly size?: string;
+          readonly notional?: number;
+          readonly margin_trading?: number;
+        }): Promise<any> {
+          return post(`/api/margin/v3/batch_orders`, params);
+        },
+        async postCancelOrder(
+          order_id: string,
+          params?: {
+            readonly client_oid?: string;
+            readonly instrument_id?: string;
+          }
+        ): Promise<any> {
+          return post(`/api/margin/v3/cancel_orders/${order_id}`, params);
+        },
+        async postCancelBatchOrders(
+          params: [
+            { readonly instument_id: string; readonly order_ids: [string] }
+          ]
+        ): Promise<any> {
+          return post(`/api/margin/v3/cancel_batch_orders`, params);
+        },
+        async getOrders(params: {
+          readonly status: string;
+          readonly instument_id: string;
+          readonly from?: string;
+          readonly to?: string;
+          readonly limit?: string;
+        }): Promise<any> {
+          return get(`/api/margin/v3/orders?` + querystring.stringify(params));
+        },
+        async getOrder(
+          order_id: string,
+          params: { readonly instrument_id: string }
+        ): Promise<any> {
+          return get(
+            `/api/margin/v3/orders/${order_id}?` + querystring.stringify(params)
+          );
+        },
+        async getOrdersPending(params?: {
+          readonly from?: string;
+          readonly to?: string;
+          readonly limit?: string;
+          readonly instrument_id?: string;
+        }): Promise<any> {
+          return get(
+            `/api/margin/v3/orders_pending${
+              params ? `?${querystring.stringify(params)}` : ''
+            }`
+          );
+        },
+        async getFills(params: {
+          readonly order_id: string;
+          readonly instument_id: string;
+          readonly from?: string;
+          readonly to?: string;
+          readonly limit?: string;
+        }): Promise<any> {
+          return get(`/api/margin/v3/fills?${querystring.stringify(params)}`);
+        }
+      };
+    },
+
     futures(): any {
       return {
         async getPosition(instrument_id?: string): Promise<any> {

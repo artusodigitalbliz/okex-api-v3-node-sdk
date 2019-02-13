@@ -64,18 +64,17 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<p><strong><em>apikey</em></strong>相关申请和修改，请在登录 <strong><em>”<a href="http://www.okex.com%E2%80%9D">www.okex.com”</a></em></strong>成功后，“<strong><em>账户-个人中心-我的API</em></strong>”申请V3 API页面进行相关操作。</p>
-				<p>###安装方法
-					npm i @okfe/okex-node
-				使用指南</p>
+				<p><strong>apikey</strong>相关申请和修改，请在登录 <strong>&quot;<a href="http://www.okex.com&quot;">www.okex.com&quot;</a></strong>成功后，&quot;<strong>账户-个人中心-我的API</strong>&quot;申请V3 API页面进行相关操作。</p>
+				<p>###安装方法</p>
+				<pre><code>npm i @okfe/okex-<span class="hljs-keyword">node</span><span class="hljs-title"></span></code></pre><p>使用指南</p>
 				<pre><code><span class="hljs-keyword">const</span> { PublicClient } = <span class="hljs-built_in">require</span>(‘@okfe/okex-node’);
 <span class="hljs-keyword">const</span> { V3WebsocketClient } = <span class="hljs-built_in">require</span>(‘@okfe/okex-node’);
 <span class="hljs-keyword">const</span> { AuthenticatedClient } = <span class="hljs-built_in">require</span>(‘@okfe/okex-node’);
 <span class="hljs-keyword">const</span> pClient = <span class="hljs-keyword">new</span> PublicClient();
 onst authClient = <span class="hljs-keyword">new</span> AuthenticatedClient(key,secret, passphrase);
 <span class="hljs-keyword">const</span> wss = <span class="hljs-keyword">new</span> V3WebsocketClient();</code></pre><h3 id="api-">API指南</h3>
-				<p><strong><em>WebSocket</em></strong>行情订阅和推送，交易推送API，对应的源码文件是
-				<strong><em>WebsocketClient.js</em></strong></p>
+				<p><strong>WebSocket</strong>行情订阅和推送，交易推送API，对应的源码文件是
+				<strong>WebsocketClient.js</strong></p>
 				<p>用法如：</p>
 				<pre><code><span class="hljs-selector-tag">wss</span><span class="hljs-selector-class">.connect</span>();
 <span class="hljs-selector-tag">wss</span><span class="hljs-selector-class">.login</span>(key, secret,passpharase )
@@ -104,8 +103,8 @@ onst authClient = <span class="hljs-keyword">new</span> AuthenticatedClient(key,
 						</tr>
 				</tbody></table>
 				<h2 id="-a-name-markdown-pane-a-"><a name="markdown-pane"></a></h2>
-				<p><strong><em>HTTP</em></strong>接口部分是下单，撤单等操作</p>
-				<p><strong><em>PublicClient.js</em></strong>是无需登录即可获取的数据接口，</p>
+				<p><strong>HTTP</strong>接口部分是下单，撤单等操作</p>
+				<p><strong>PublicClient.js</strong>是无需登录即可获取的数据接口，</p>
 				<p>用法实例如:</p>
 				<pre><code>pClient.spot().getSpotBook(‘<span class="hljs-keyword">BTC-USDT’, </span>{‘size’:’<span class="hljs-number">10</span>’})<span class="hljs-comment">;</span></code></pre><p><mark>币币API</mark></p>
 				<table>
@@ -289,7 +288,7 @@ authClient.swap<span class="hljs-literal">()</span>.post<span class="hljs-constr
 					</thead>
 					<tbody><tr>
 							<td>spot().getAccounts(currency)</td>
-							<td>币币账户信息</td>
+							<td>币币账户信息(currency不填则返回所有币种)</td>
 						</tr>
 						<tr>
 							<td>spot().getLedger(currency)</td>
@@ -328,6 +327,71 @@ authClient.swap<span class="hljs-literal">()</span>.post<span class="hljs-constr
 							<td>获取成交明细</td>
 						</tr>
 				</tbody></table>
+				<p><mark>币币杠杆API</mark></p>
+				<table>
+					<thead>
+						<tr>
+							<th>接口</th>
+							<th>说明</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>margin().getAccounts(currency)</td>
+							<td>币币账户信息(currency不填则返回所有币种)</td>
+						</tr>
+						<tr>
+							<td>margin().getLedger(currency)</td>
+							<td>账单流水</td>
+						</tr>
+						<tr>
+							<td>margin().getAvailability(instrument_id)</td>
+							<td>杠杆配置信息(currency填写表示某个杠杆信息否则返回所有)</td>
+						</tr>
+						<tr>
+							<td>margin().getborrowed(instrument_id)</td>
+							<td>获取借币记录(currency填写表示某个账户借币信息否则代表所有)</td>
+						</tr>
+						<tr>
+							<td>margin().postBorrow(params)</td>
+							<td>借币接口</td>
+						</tr>
+						<tr>
+							<td>margin().postRepayment(params)</td>
+							<td>还币</td>
+						</tr>
+						<tr>
+							<td>margin().postOrder(params)</td>
+							<td>下单</td>
+						</tr>
+						<tr>
+							<td>margin().postBatchOrder(params)</td>
+							<td>批量下单</td>
+						</tr>
+						<tr>
+							<td>margin().postCancelOrder(params)</td>
+							<td>撤销指定订单</td>
+						</tr>
+						<tr>
+							<td>margin().postCancelBatchOrders(params)</td>
+							<td>批量撤销订单</td>
+						</tr>
+						<tr>
+							<td>margin().getOrders(params)</td>
+							<td>获取订单列表</td>
+						</tr>
+						<tr>
+							<td>margin().getOrder(order_id, params)</td>
+							<td>获取指定订单ID的信息</td>
+						</tr>
+						<tr>
+							<td>margin().getOrdersPending(params)</td>
+							<td>获取所有未成交订单</td>
+						</tr>
+						<tr>
+							<td>margin().getFills(params)</td>
+							<td>获取成交明细</td>
+						</tr>
+				</tbody></table>
 				<p><mark>账户API相关</mark></p>
 				<table>
 					<thead>
@@ -341,12 +405,12 @@ authClient.swap<span class="hljs-literal">()</span>.post<span class="hljs-constr
 							<td>获取币种列表</td>
 						</tr>
 						<tr>
-							<td>account().getWithdrawalFee()</td>
-							<td>提币接口</td>
+							<td>account().getWithdrawalFee(currency)</td>
+							<td>提币手续费（currency不填则返回所有）</td>
 						</tr>
 						<tr>
 							<td>account().getWallet(currency)</td>
-							<td>钱包账户信息</td>
+							<td>钱包账户信息(currency不填则获取所有币种，否则获取指定币种的信息)</td>
 						</tr>
 						<tr>
 							<td>account().postTransfer(params)</td>
@@ -362,7 +426,7 @@ authClient.swap<span class="hljs-literal">()</span>.post<span class="hljs-constr
 						</tr>
 						<tr>
 							<td>account().getLedger(params)</td>
-							<td>账单流水查询</td>
+							<td>账单流水查询(不填参数返回所有)</td>
 						</tr>
 						<tr>
 							<td>account().getAddress(params)</td>

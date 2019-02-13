@@ -1,4 +1,4 @@
-***apikey***相关申请和修改，请在登录 ***”www.okex.com”***成功后，“***账户-个人中心-我的API***”申请V3 API页面进行相关操作。
+**apikey**相关申请和修改，请在登录 **”www.okex.com”**成功后，“**账户-个人中心-我的API**”申请V3 API页面进行相关操作。
 ###安装方法
 	npm i @okfe/okex-node
 使用指南
@@ -13,8 +13,8 @@
 
 
 ### API指南
-***WebSocket***行情订阅和推送，交易推送API，对应的源码文件是
-***WebsocketClient.js***
+**WebSocket**行情订阅和推送，交易推送API，对应的源码文件是
+**WebsocketClient.js**
 
 用法如：
 
@@ -31,9 +31,9 @@ unsubscribe(...args) | 取消行情订阅
 checksum(data)	| 检查数据有效性
 
 ## <a name="markdown-pane"></a>
-***HTTP***接口部分是下单，撤单等操作
+**HTTP**接口部分是下单，撤单等操作
 
-***PublicClient.js***是无需登录即可获取的数据接口，
+**PublicClient.js**是无需登录即可获取的数据接口，
 
 用法实例如:
 
@@ -79,7 +79,7 @@ swap().getInstruments()	|合约信息
 swap().getDepth()	|深度信息
 swap().getTicker()	|Tiker信息
 swap().getTrades(instrument_id, params)	|获取成交数据
-swap().getCandles(instrument_id, params)	|获取k线数据
+swap().getCandles(instrument_id, params)|获取k线数据
 swap().getIndex(instrument_id)	|获取指数信息
 swap().getRate()	|获取法币汇率
 swap().getOpenInterest(instrument_id)	|获取平台总持仓量
@@ -110,7 +110,7 @@ ett().getDefinePrice(ett)	|获取ETT清算历史定价
 
 接口  | 说明
 ------------- | -------------
-spot().getAccounts(currency)	|币币账户信息
+spot().getAccounts(currency)	|币币账户信息(currency不填则返回所有币种)
 spot().getLedger(currency)	|账单流水
 spot().postOrder(params)	|下单
 spot().postBatchOrders(params)	|批量下单
@@ -126,12 +126,12 @@ spot().getFills(params)  |	获取成交明细
 接口  | 说明
 ------------- | -------------
 account().getCurrencies()	|获取币种列表
-account().getWithdrawalFee()	|提币接口
-account().getWallet(currency)	|钱包账户信息
+account().getWithdrawalFee(currency)	|提币手续费（currency不填则返回所有）
+account().getWallet(currency)	|钱包账户信息(currency不填则获取所有币种，否则获取指定币种的信息)
 account().postTransfer(params)	|资金划转
 account().postWithdrawal(params)	|提币
 account().getWithdrawalHistory(currency)|查询最近的提币记录
-account().getLedger(params)	|账单流水查询
+account().getLedger(params)	|账单流水查询(不填参数返回所有)
 account().getAddress(params)	|获取充值地址
 account().getDepositHistory(currency)	|获取所有币种/单个 充值记录
 

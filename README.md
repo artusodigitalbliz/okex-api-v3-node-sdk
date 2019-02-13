@@ -121,6 +121,27 @@ spot().getOrdersPending(params)	|获取所有未成交订单
 spot().getOrder(order_id, params)	|获取订单信息
 spot().getFills(params)  |	获取成交明细
 
+<mark>币币杠杆API</mark>
+
+接口  | 说明
+------------- | -------------
+margin().getAccounts(currency)	|币币账户信息(currency不填则返回所有币种)
+margin().getLedger(currency)	|账单流水
+margin().getAvailability(instrument_id) | 杠杆配置信息(currency填写表示某个杠杆信息否则返回所有)
+margin().getborrowed(instrument_id) |  获取借币记录(currency填写表示某个账户借币信息否则代表所有)
+margin().postBorrow(params) | 借币接口
+margin().postRepayment(params) | 还币
+margin().postOrder(params) | 下单
+margin().postBatchOrder(params) | 批量下单
+margin().postCancelOrder(params) | 撤销指定订单
+margin().postCancelBatchOrders(params) | 批量撤销订单
+margin().getOrders(params) | 获取订单列表
+margin().getOrder(order_id, params) | 获取指定订单ID的信息
+margin().getOrdersPending(params) | 获取所有未成交订单
+margin().getFills(params) | 获取成交明细
+
+
+
 <mark>账户API相关</mark>
 
 接口  | 说明

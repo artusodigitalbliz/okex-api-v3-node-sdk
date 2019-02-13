@@ -16,7 +16,11 @@ export function PublicClient(
   async function get(url: string, params?: object): Promise<any> {
     return axiosInstance
       .get(url, { params })
-      .then((res: { readonly data: any }) => res.data);
+      .then((res: { readonly data: any }) => res.data)
+      .catch(error => {
+        console.log(JSON.stringify(error.response.data));
+        console.log(error.messge);
+      });
   }
 
   return {

@@ -54,7 +54,11 @@ export function AuthenticatedClient(
   async function get(url: string, params?: object): Promise<any> {
     return axiosInstance
       .get(url, { params, headers: { ...getSignature('get', url) } })
-      .then(res => res.data);
+      .then(res => res.data)
+      .catch(error => {
+        console.log(JSON.stringify(error.response.data));
+        console.log(error.message);
+      });
   }
 
   async function post(
@@ -68,7 +72,11 @@ export function AuthenticatedClient(
         headers: { ...getSignature('post', url, { body: bodyJson }) },
         params
       })
-      .then(res => res.data);
+      .then(res => res.data)
+      .catch(error => {
+        console.log(JSON.stringify(error.response.data));
+        console.log(error.message);
+      });
   }
 
   async function del(

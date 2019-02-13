@@ -20,6 +20,9 @@
     "no-delete": true,
     "no-method-signature": true,
 
+    // console rules 
+    "no-console" : false,
+
     // Functional style rules
     "no-this": true,
     "no-class": true,

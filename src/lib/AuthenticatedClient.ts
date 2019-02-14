@@ -237,9 +237,11 @@ export function AuthenticatedClient(
             }`
           );
         },
-        async getAddress(params: { readonly currency: string }): Promise<any> {
+        async getAddress(currency: string ): Promise<any> {
           return get(
-            `/api/account/v3/deposit/address?${querystring.stringify(params)}`
+            `/api/account/v3/deposit/address${
+              currency ? `?currency=${currency}` : ''
+            }`
           );
         },
         async getDepositHistory(currency?: string): Promise<any> {
@@ -251,13 +253,13 @@ export function AuthenticatedClient(
     },
     margin(): any {
       return {
-        async getAccounts(currency?: string): Promise<any> {
-          return currency
-            ? get(`/api/margin/v3/accounts/${currency}`)
+        async getAccounts(instrument_id?: string): Promise<any> {
+          return instrument_id
+            ? get(`/api/margin/v3/accounts/${instrument_id}`)
             : get('/api/margin/v3/accounts');
         },
-        async getLedger(currency: string): Promise<any> {
-          return get(`/api/margin/v3/accounts/${currency}/ledger`);
+        async getLedger(instrument_id: string): Promise<any> {
+          return get(`/api/margin/v3/accounts/${instrument_id}/ledger`);
         },
         async getAvailability(instrument_id?: string): Promise<any> {
           return instrument_id
@@ -468,6 +470,9 @@ export function AuthenticatedClient(
         },
         async getOrder(instrument_id: string, order_id: string): Promise<any> {
           return get(`/api/futures/v3/orders/${instrument_id}/${order_id}`);
+        },
+        async getHolds(instrument_id: string): Promise<any> {
+          return get(`/api/futures/v3/accounts/${instrument_id}/holds`);
         },
         async getFills(params: {
           readonly order_id: string;

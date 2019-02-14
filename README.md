@@ -9,7 +9,7 @@
 	const { V3WebsocketClient } = require(‘@okfe/okex-node’);
 	const { AuthenticatedClient } = require(‘@okfe/okex-node’);
 	const pClient = new PublicClient();
-	onst authClient = new AuthenticatedClient(key,secret, passphrase);
+	const authClient = new AuthenticatedClient(key,secret, passphrase);
 	const wss = new V3WebsocketClient();
 
 
@@ -69,8 +69,10 @@ futures().getRate()	|获取法币汇率
 futures().getEstimatedPrice(instrument_id)|获取预估交割价
 futures().getOpenInterest(instrument_id)|获取平台总持仓量
 futures().getPriceLimit(instrument_id)	|获取当前限价
-futrue().getLiquidation(instrument_id, params)|获取爆仓单
-future().getHolds(instrument)	|获取合约挂单冻结数量
+futures().getLiquidation(instrument_id, params)|获取爆仓单
+futures().getMarkPrice(instrument_id) | 获取标记价格
+
+
 
 
 <mark>永续合约API</mark>
@@ -127,8 +129,8 @@ spot().getFills(params)  |	获取成交明细
 
 接口  | 说明
 ------------- | -------------
-margin().getAccounts(currency)	|币币账户信息(currency不填则返回所有币种)
-margin().getLedger(currency)	|账单流水
+margin().getAccounts(instrument_id)	|币币账户信息(instrument_id不填则返回所有币种)
+margin().getLedger(instrument_id)	|账单流水
 margin().getAvailability(instrument_id) | 杠杆配置信息(currency填写表示某个杠杆信息否则返回所有)
 margin().getborrowed(instrument_id) |  获取借币记录(currency填写表示某个账户借币信息否则代表所有)
 margin().postBorrow(params) | 借币接口
@@ -155,7 +157,7 @@ account().postTransfer(params)	|资金划转
 account().postWithdrawal(params)	|提币
 account().getWithdrawalHistory(currency)|查询最近的提币记录
 account().getLedger(params)	|账单流水查询(不填参数返回所有)
-account().getAddress(params)	|获取充值地址
+account().getAddress(currency)	|获取充值地址
 account().getDepositHistory(currency)	|获取所有币种/单个 充值记录
 
 <mark>交割合约API相关</mark>
@@ -174,6 +176,8 @@ futures().cancrdelBatchOers(instrument_id, params)|批量撤销订单
 futures().getOrders(instrument_id, params)|获取订单列表
 futures().getOrder(instrument_id, order_id)|获取订单信息
 futures().getFills(params)	|获取成交明细
+futures().getHolds(instrument_id) | 获取合约挂单冻结数量
+
 
 <mark>永续合约API</mark>
 

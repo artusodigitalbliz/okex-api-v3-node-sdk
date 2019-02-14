@@ -71,7 +71,7 @@
 <span class="hljs-keyword">const</span> { V3WebsocketClient } = <span class="hljs-built_in">require</span>(‘@okfe/okex-node’);
 <span class="hljs-keyword">const</span> { AuthenticatedClient } = <span class="hljs-built_in">require</span>(‘@okfe/okex-node’);
 <span class="hljs-keyword">const</span> pClient = <span class="hljs-keyword">new</span> PublicClient();
-onst authClient = <span class="hljs-keyword">new</span> AuthenticatedClient(key,secret, passphrase);
+<span class="hljs-keyword">const</span> authClient = <span class="hljs-keyword">new</span> AuthenticatedClient(key,secret, passphrase);
 <span class="hljs-keyword">const</span> wss = <span class="hljs-keyword">new</span> V3WebsocketClient();</code></pre><h3 id="api-">API指南</h3>
 				<p><strong>WebSocket</strong>行情订阅和推送，交易推送API，对应的源码文件是
 				<strong>WebsocketClient.js</strong></p>
@@ -184,12 +184,12 @@ onst authClient = <span class="hljs-keyword">new</span> AuthenticatedClient(key,
 							<td>获取当前限价</td>
 						</tr>
 						<tr>
-							<td>futrue().getLiquidation(instrument_id, params)</td>
+							<td>futures().getLiquidation(instrument_id, params)</td>
 							<td>获取爆仓单</td>
 						</tr>
 						<tr>
-							<td>future().getHolds(instrument)</td>
-							<td>获取合约挂单冻结数量</td>
+							<td>futures().getMarkPrice(instrument_id)</td>
+							<td>获取标记价格</td>
 						</tr>
 				</tbody></table>
 				<p><mark>永续合约API</mark></p>
@@ -336,11 +336,11 @@ authClient.swap<span class="hljs-literal">()</span>.post<span class="hljs-constr
 						</tr>
 					</thead>
 					<tbody><tr>
-							<td>margin().getAccounts(currency)</td>
+							<td>margin().getAccounts(instrument_id)</td>
 							<td>币币账户信息(currency不填则返回所有币种)</td>
 						</tr>
 						<tr>
-							<td>margin().getLedger(currency)</td>
+							<td>margin().getLedger(instrument_id)</td>
 							<td>账单流水</td>
 						</tr>
 						<tr>
@@ -492,6 +492,10 @@ authClient.swap<span class="hljs-literal">()</span>.post<span class="hljs-constr
 						<tr>
 							<td>futures().getFills(params)</td>
 							<td>获取成交明细</td>
+						</tr>
+						<tr>
+							<td>futures().getHolds(instrument)</td>
+							<td>获取合约挂单冻结数量</td>
 						</tr>
 				</tbody></table>
 				<p><mark>永续合约API</mark></p>

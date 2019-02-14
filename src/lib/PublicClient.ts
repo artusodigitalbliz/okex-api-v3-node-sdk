@@ -156,8 +156,8 @@ export function PublicClient(
             )}`
           );
         },
-        async getHolds(instrument_id: string): Promise<any> {
-          return get(`/api/futures/v3/accounts/${instrument_id}/holds`);
+        async getMarkPrice(instrument_id: string): Promise<any> {
+          return get(`/api/futures/v3/instruments/${instrument_id}/mark_price`);
         }
       };
     },

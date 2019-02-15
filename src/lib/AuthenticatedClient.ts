@@ -253,13 +253,13 @@ export function AuthenticatedClient(
     },
     margin(): any {
       return {
-        async getAccounts(instruemnt_id?: string): Promise<any> {
-          return instruemnt_id
-            ? get(`/api/margin/v3/accounts/${instruemnt_id}`)
+        async getAccounts(instrument_id?: string): Promise<any> {
+          return instrument_id
+            ? get(`/api/margin/v3/accounts/${instrument_id}`)
             : get('/api/margin/v3/accounts');
         },
-        async getLedger(instruemnt_id: string): Promise<any> {
-          return get(`/api/margin/v3/accounts/${instruemnt_id}/ledger`);
+        async getLedger(instrument_id: string): Promise<any> {
+          return get(`/api/margin/v3/accounts/${instrument_id}/ledger`);
         },
         async getAvailability(instrument_id?: string): Promise<any> {
           return instrument_id
@@ -349,12 +349,11 @@ export function AuthenticatedClient(
         }): Promise<any> {
           return get(`/api/margin/v3/orders?` + querystring.stringify(params));
         },
-        async getOrder(
-          order_id: string,
-          params: { readonly instrument_id: string }
-        ): Promise<any> {
+        async getOrder(order_id: string, instrument_id: string): Promise<any> {
           return get(
-            `/api/margin/v3/orders/${order_id}?` + querystring.stringify(params)
+            `/api/margin/v3/orders/${order_id}${
+              instrument_id ? `?instrument_id=${instrument_id}` : ''
+            }`
           );
         },
         async getOrdersPending(params?: {
@@ -519,7 +518,7 @@ export function AuthenticatedClient(
           readonly type: string;
           readonly match_price?: string;
           readonly price: string;
-          readonly instruemnt_id: string;
+          readonly instrument_id: string;
         }): Promise<any> {
           return post('/api/swap/v3/order', params);
         },

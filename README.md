@@ -78,8 +78,8 @@ futures().getMarkPrice(instrument_id) | 获取标记价格
 接口  | 说明
 ------------- | -------------
 swap().getInstruments()	|合约信息
-swap().getDepth()	|深度信息
-swap().getTicker()	|Tiker信息
+swap().getDepth(instrument_id,size)	|深度信息
+swap().getTicker(instrument_id)	|Tiker信息
 swap().getTrades(instrument_id, params)	|获取成交数据
 swap().getCandles(instrument_id, params)|获取k线数据
 swap().getIndex(instrument_id)	|获取指数信息

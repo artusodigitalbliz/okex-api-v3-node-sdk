@@ -69,7 +69,10 @@ export function AuthenticatedClient(
     const bodyJson = JSON.stringify(body);
     return axiosInstance
       .post(url, body, {
-        headers: { ...getSignature('post', url, { body: bodyJson }) },
+        headers: {
+          'content-type': 'application/json; charset=utf-8',
+          ...getSignature('post', url, { body: bodyJson })
+        },
         params
       })
       .then(res => res.data)
@@ -87,7 +90,10 @@ export function AuthenticatedClient(
     const bodyJson = JSON.stringify(body);
     return axiosInstance
       .post(url, body, {
-        headers: { ...getSignature('delete', url, { body: bodyJson }) },
+        headers: {
+          'content-type': 'application/json; charset=utf-8',
+          ...getSignature('delete', url, { body: bodyJson })
+        },
         params
       })
       .then(res => res.data);

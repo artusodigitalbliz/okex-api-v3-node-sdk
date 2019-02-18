@@ -166,15 +166,10 @@ export function PublicClient(
         async getInstruments(): Promise<any> {
           return get('/api/swap/v3/instruments');
         },
-        async getDepth(
-          instrument_id: string,
-          params: {
-            readonly size: string;
-          }
-        ): Promise<any> {
+        async getDepth(instrument_id: string, size: string): Promise<any> {
           return get(
             `/api/swap/v3/instruments/${instrument_id}/depth${
-              params ? `?${querystring.stringify(params)}` : ''
+              size ? `?size=${size}` : ''
             }`
           );
         },

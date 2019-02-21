@@ -75,7 +75,11 @@ export function AuthenticatedClient(
         },
         params
       })
-      .then(res => res.data);
+      .then(res => res.data)
+      .catch(error => {
+        console.log(JSON.stringify(error.response.data));
+        console.log(error.message);
+      });
   }
 
   async function del(
@@ -92,7 +96,11 @@ export function AuthenticatedClient(
         },
         params
       })
-      .then(res => res.data);
+      .then(res => res.data)
+      .catch(error => {
+        console.log(JSON.stringify(error.response.data));
+        console.log(error.message);
+      });
   }
 
   return {

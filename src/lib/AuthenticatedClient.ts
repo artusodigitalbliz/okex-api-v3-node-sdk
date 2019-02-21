@@ -96,11 +96,7 @@ export function AuthenticatedClient(
         },
         params
       })
-      .then(res => res.data)
-      .catch(error => {
-        console.log(JSON.stringify(error.response.data));
-        console.log(error.message);
-      });
+      .then(res => res.data);
   }
 
   return {

@@ -96,7 +96,11 @@ export function AuthenticatedClient(
         },
         params
       })
-      .then(res => res.data);
+      .then(res => res.data)
+      .catch(error =>{
+        console.log(JSON.stringify(error.response.data));
+        console.log(error.message);
+      });
   }
 
   return {
@@ -561,10 +565,13 @@ export function AuthenticatedClient(
             readonly limit?: string;
           }
         ): Promise<any> {
-          return get(`/api/swap/v3/orders/${instrument_id}`, params);
+          return get(`/api/swap/v3/orders/${instrument_id}?${querystring.stringify(params)}`);
         },
         async getOrder(instrument_id: string, order_id: string): Promise<any> {
           return get(`/api/swap/v3/orders/${instrument_id}/${order_id}`);
+        },
+        async getHolds(instrument_id: string): Promise<any> {
+          return get(`/api/swap/v3/accounts/${instrument_id}/holds`);
         },
         async getFills(params: {
           readonly order_id: string;

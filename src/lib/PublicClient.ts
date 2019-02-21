@@ -234,9 +234,6 @@ export function PublicClient(
             params
           );
         },
-        async getHolds(instrument_id: string): Promise<any> {
-          return get(`/api/swap/v3/instruments/${instrument_id}/holds`);
-        },
         async getFundingTime(instrument_id: string): Promise<any> {
           return get(`/api/swap/v3/instruments/${instrument_id}/funding_time`);
         },

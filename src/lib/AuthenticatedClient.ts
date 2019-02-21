@@ -557,7 +557,10 @@ export function AuthenticatedClient(
             readonly limit?: string;
           }
         ): Promise<any> {
-          return get(`/api/swap/v3/orders/${instrument_id} ? ${querystring.stringify(params)}`);
+          return get(
+            `/api/swap/v3/orders/${instrument_id}?` +
+              querystring.stringify(params)
+          );
         },
         async getOrder(instrument_id: string, order_id: string): Promise<any> {
           return get(`/api/swap/v3/orders/${instrument_id}/${order_id}`);

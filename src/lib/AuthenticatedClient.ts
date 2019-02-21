@@ -75,11 +75,7 @@ export function AuthenticatedClient(
         },
         params
       })
-      .then(res => res.data)
-      .catch(error => {
-        console.log(JSON.stringify(error.response.data));
-        console.log(error.message);
-      });
+      .then(res => res.data);
   }
 
   async function del(
@@ -561,7 +557,7 @@ export function AuthenticatedClient(
             readonly limit?: string;
           }
         ): Promise<any> {
-          return get(`/api/swap/v3/orders/${instrument_id}?${querystring.stringify(params)}`);
+          return get(`/api/swap/v3/orders/${instrument_id}`, params);
         },
         async getOrder(instrument_id: string, order_id: string): Promise<any> {
           return get(`/api/swap/v3/orders/${instrument_id}/${order_id}`);

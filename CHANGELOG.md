@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.0.46"></a>
+## [0.0.46](https://github.com/okcoin-okex/okex-api-v3-node-sdk/compare/v0.0.39...v0.0.46) (2019-02-21)
+
+
+
 <a name="0.0.45"></a>
 ## [0.0.45](https://github.com/okcoin-okex/okex-api-v3-node-sdk/compare/v0.0.44...v0.0.45) (2019-02-18)
 

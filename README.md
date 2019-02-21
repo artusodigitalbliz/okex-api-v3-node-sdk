@@ -87,6 +87,7 @@ swap().getRate()	|获取法币汇率
 swap().getOpenInterest(instrument_id)	|获取平台总持仓量
 swap().getPriceLimit(instrument_id)	|获取当前限价
 swap().getLiquidation(instrument_id, params)|获取爆仓单
+swap().getHolds(instrument)	|获取合约挂单冻结数量
 swap().getFundingTime(instrument_id)	|获取成交数据
 swap().getMarkPrice(instrument_id)	|获取k线数据
 swap().getHistoricalFudingRate(instrument_id, params)|获取合约历史资金费率
@@ -190,7 +191,6 @@ swap().postCancelOrder(instrument_id, order_id)|撤单
 swap().postCancelBatchOrder(instrument_id, params)|批量撤销订单
 swap().getOrders(instrument_id, params)	|获取所有订单列表
 swap().getFills(params)	|获取成交明细
-swap().getHolds(instrument)	|获取合约挂单冻结数量
 swap().getOrder(instrument_id, order_id)|获取订单信息
 
 

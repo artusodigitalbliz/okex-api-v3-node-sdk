@@ -562,6 +562,9 @@ export function AuthenticatedClient(
         async getOrder(instrument_id: string, order_id: string): Promise<any> {
           return get(`/api/swap/v3/orders/${instrument_id}/${order_id}`);
         },
+        async getHolds(instrument_id: string): Promise<any> {
+          return get(`/api/swap/v3/accounts/${instrument_id}/holds`);
+        },
         async getFills(params: {
           readonly order_id: string;
           readonly instrument_id: string;

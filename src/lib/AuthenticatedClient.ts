@@ -9,11 +9,12 @@ export function AuthenticatedClient(
   secret: string,
   passphrase: string,
   apiUri = 'https://www.okex.com',
+  timeout = 3000,
   axiosConfig = {}
 ): any {
   const axiosInstance: AxiosInstance = axios.create({
     baseURL: apiUri,
-    timeout: 3000,
+    timeout,
     ...axiosConfig
   });
 
@@ -56,8 +57,12 @@ export function AuthenticatedClient(
       .get(url, { params, headers: { ...getSignature('get', url) } })
       .then(res => res.data)
       .catch(error => {
-        console.log(JSON.stringify(error.response.data));
-        console.log(error.message);
+        console.log(
+          error.response && error.response !== undefined && error.response.data
+            ? JSON.stringify(error.response.data)
+            : error
+        );
+        console.log(error.messge ? error.messge : `{url} error`);
       });
   }
 
@@ -77,8 +82,12 @@ export function AuthenticatedClient(
       })
       .then(res => res.data)
       .catch(error => {
-        console.log(JSON.stringify(error.response.data));
-        console.log(error.message);
+        console.log(
+          error.response && error.response !== undefined && error.response.data
+            ? JSON.stringify(error.response.data)
+            : error
+        );
+        console.log(error.messge ? error.messge : `{url} error`);
       });
   }
 
@@ -98,8 +107,12 @@ export function AuthenticatedClient(
       })
       .then(res => res.data)
       .catch(error => {
-        console.log(JSON.stringify(error.response.data));
-        console.log(error.message);
+        console.log(
+          error.response && error.response !== undefined && error.response.data
+            ? JSON.stringify(error.response.data)
+            : error
+        );
+        console.log(error.messge ? error.messge : `{url} error`);
       });
   }
 

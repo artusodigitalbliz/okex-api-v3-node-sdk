@@ -5,11 +5,12 @@ import * as querystring from 'querystring';
 
 export function PublicClient(
   apiUri = 'https://www.okex.com',
+  timeout = 3000,
   axiosConfig = {}
 ): any {
   const axiosInstance: AxiosInstance = axios.create({
     baseURL: apiUri,
-    timeout: 3000,
+    timeout,
     ...axiosConfig
   });
 
@@ -18,8 +19,12 @@ export function PublicClient(
       .get(url, { params })
       .then((res: { readonly data: any }) => res.data)
       .catch(error => {
-        console.log(JSON.stringify(error.response.data));
-        console.log(error.messge);
+        console.log(
+          error.response && error.response !== undefined
+            ? JSON.stringify(error.response.data)
+            : error
+        );
+        console.log(error.messge ? error.messge : `{url} error`);
       });
   }
 

@@ -24,7 +24,7 @@ export function PublicClient(
             ? JSON.stringify(error.response.data)
             : error
         );
-        console.log(error.messge ? error.messge : `{url} error`);
+        console.log(error.messge ? error.messge : `${url} error`);
       });
   }
 

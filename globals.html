@@ -89,13 +89,13 @@
 					<a name="authenticatedclient" class="tsd-anchor"></a>
 					<h3>Authenticated<wbr>Client</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">Authenticated<wbr>Client<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, secret<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, passphrase<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, apiUri<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, axiosConfig<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">Authenticated<wbr>Client<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, secret<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, passphrase<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, apiUri<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, timeout<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, axiosConfig<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/okcoin-okex/okex-api-v3-node-sdk/blob/5e986e6/src/lib/AuthenticatedClient.ts#L7">lib/AuthenticatedClient.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/okcoin-okex/okex-api-v3-node-sdk/blob/ab7bf6b/src/lib/AuthenticatedClient.ts#L7">lib/AuthenticatedClient.ts:7</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -113,6 +113,9 @@
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> apiUri: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;https://www.okex.com&quot;</span></h5>
 								</li>
 								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> timeout: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;3000</span></h5>
+								</li>
+								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> axiosConfig: <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
 									<ul class="tsd-parameters">
 									</ul>
@@ -126,19 +129,22 @@
 					<a name="publicclient" class="tsd-anchor"></a>
 					<h3>Public<wbr>Client</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">Public<wbr>Client<span class="tsd-signature-symbol">(</span>apiUri<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, axiosConfig<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">Public<wbr>Client<span class="tsd-signature-symbol">(</span>apiUri<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, timeout<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, axiosConfig<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/okcoin-okex/okex-api-v3-node-sdk/blob/5e986e6/src/lib/PublicClient.ts#L6">lib/PublicClient.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/okcoin-okex/okex-api-v3-node-sdk/blob/ab7bf6b/src/lib/PublicClient.ts#L6">lib/PublicClient.ts:6</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> apiUri: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;https://www.okex.com&quot;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> timeout: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;3000</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> axiosConfig: <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
